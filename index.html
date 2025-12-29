@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Quán</title>
+</head>
+<body>
+  <h2>🍽️ Menu Quán</h2>
+  <p>Bàn số: <span id="table"></span></p>
+
+  <button onclick="add('Phở bò')">Phở bò - 40k</button><br><br>
+  <button onclick="add('Trà đá')">Trà đá - 5k</button>
+
+  <h3>🛒 Giỏ hàng</h3>
+  <ul id="cart"></ul>
+
+  <button onclick="send()">📤 Gửi đơn</button>
+
+<script>
+const cart = [];
+const params = new URLSearchParams(window.location.search);
+const table = params.get("table") || "Chưa có";
+
+document.getElementById("table").innerText = table;
+
+function add(item) {
+  cart.push(item);
+  render();
+}
+
+function render() {
+  const ul = document.getElementById("cart");
+  ul.innerHTML = "";
+  cart.forEach(i => {
+    const li = document.createElement("li");
+    li.innerText = i;
+    ul.appendChild(li);
+  });
+}
+
+function send() {
+  alert("✅ Đặt món thành công!\nBàn " + table + "\n" + cart.join(", "));
+}
+</script>
+</body>
+</html>
